@@ -18,7 +18,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { FrameworkReducer } from "./reducer";
-import { menuOpenAction } from "./actions";
 import {withRouter} from "react-router-dom";
 import Routers from "../router";
 
@@ -90,17 +89,19 @@ const useStyles = makeStyles((theme: Theme) =>
 const Layout: React.FC = (props: any) => {
     const classes: any = useStyles();
     const theme: any = useTheme();
+    // useReducer 相当于自定义的 useState
     const [state, dispatch] = React.useReducer(FrameworkReducer, { open: false });
     const [open, setOpen] = React.useState(state.open);
     const [selectedIndex, setSelectedIndex] = React.useState(props.location.pathname);
     const handleDrawerOpen = () => {
         setOpen(true);
-        dispatch(menuOpenAction({ open: true }));
+        // dispatch参数中只能传值(包括对象)，不能传递回调函数
+        dispatch({ open: true });
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
-        dispatch(menuOpenAction({ open: false }));
+        dispatch({ open: false });
     };
 
     return (
