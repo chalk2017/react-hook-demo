@@ -20,6 +20,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import { FrameworkReducer } from "./reducer";
 import {withRouter} from "react-router-dom";
 import Routers from "../router";
+import {AppContext} from '../store/context';
 
 const drawerWidth: number = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -89,19 +90,26 @@ const useStyles = makeStyles((theme: Theme) =>
 const Layout: React.FC = (props: any) => {
     const classes: any = useStyles();
     const theme: any = useTheme();
+    // useContext 全局状态
+    const [appState, appDispatch] = React.useContext(AppContext);
+    console.log(appState);
     // useReducer 相当于自定义的 useState
     const [state, dispatch] = React.useReducer(FrameworkReducer, { open: false });
     const [open, setOpen] = React.useState(state.open);
+    // const [open, setOpen] = React.useReducer(FrameworkReducer,state.open);
     const [selectedIndex, setSelectedIndex] = React.useState(props.location.pathname);
     const handleDrawerOpen = () => {
         setOpen(true);
         // dispatch参数中只能传值(包括对象)，不能传递回调函数
         dispatch({ open: true });
+        // useContext 设置全局状态
+        appDispatch({open:true});
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
         dispatch({ open: false });
+        appDispatch({open:false});
     };
 
     return (
