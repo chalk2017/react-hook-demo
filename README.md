@@ -1,4 +1,5 @@
 #### react-hook cli 说明
+###### (本机 node = v10.15.3， npm = 6.9.0)
 ##### hook简介
 1. 什么是hook？
 hook是react最新的框架，是作为react的简化。它是react的功能延申，简单的说，就是以一种新的写法来编写react，但项目中也可以用旧的方式写。而hook是钩子的含义，react意为通过不同的钩子函数来简化大部分操作。
